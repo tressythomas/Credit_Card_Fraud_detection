@@ -1,6 +1,20 @@
 
 #Credit Card Fraud Detection
-
+# Anomaly detection of fraud CC transaction.
+# Dataset is sourced from Kaggle. The data is highly imbalanced as is the case of most anomaly detection cases. 
+# In order to handle the imbalance in data 3 different methods are utilised. SMOTE, MWMORE and Undersampling. 
+# As accuracy is not the appropriate metric for model measurement, Balanced accuracy as well specificity and prediction are also taken into account. 
+# 
+# 
+# 
+# I have used 3 classifiers, Logistic Regression, SVC and XGBoost to predict if the transaction is fraud or not.
+# 
+# XGBoost  with SMOTE data resulted in 
+# Balanced Accuracy : 0.93094 
+# Sensitivity : 0.98432            
+# Specificity : 0.87755            
+# Pos Pred Value : 0.99979
+# which is the best observed test model performance.
 library(gbm)
 library(ggplot2)
 library(caret)
@@ -123,9 +137,9 @@ plot(RFE_Features_over, type = c("o", "g"))
 ###################################################################################
 # create formula
 attr=predictors(RFE_Features)[1:15]
-attr=predictors(RFE_Features_MWMOTE)[1:15]
-attr=predictors(RFE_Features_down)[1:15]
-attr=predictors(RFE_Features_over)[1:15]
+# attr=predictors(RFE_Features_MWMOTE)[1:15]
+# attr=predictors(RFE_Features_down)[1:15]
+# attr=predictors(RFE_Features_over)[1:15]
 a=paste(sprintf("`%s`",attr), collapse= "+");b=paste("Class ~ ", a)
 fmla=as.formula(b)
 
@@ -348,3 +362,11 @@ MWMOTElogit.cm$byClass[11];MWMOTEsvm.cm$byClass[11];MWMOTEgbm.cm$byClass[11]
 
 dslogit.cm$overall[1];dssvm.cm$overall[1];dsgbm.cm$overall[1]
 dslogit.cm$byClass[11];MWMOTEsvm.cm$byClass[11];MWMOTEgbm.cm$byClass[11]
+
+# XGBoost  with SMOTE data resulted in 
+# Balanced Accuracy : 0.93094 
+# Sensitivity : 0.98432            
+# Specificity : 0.87755            
+# Pos Pred Value : 0.99979
+# which is the best observed test model performance.
+
